@@ -1,0 +1,16 @@
+<div>
+  <h1>Contratti</h1>
+  <p>Contratto works!</p>
+
+  <ul *ngIf="contratti.length > 0; else noContratti">
+    <li *ngFor="let contratto of contratti">
+      <p><strong>ID Contratto:</strong> {{ contratto.idContratto }}</p>
+      <p><strong>Descrizione:</strong> {{ contratto.descrizione }}</p>
+    </li>
+  </ul>
+
+
+  <ng-template #noContratti>
+    <p>Nessun contratto disponibile.</p>
+  </ng-template>
+</div>

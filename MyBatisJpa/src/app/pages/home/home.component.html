@@ -1,0 +1,28 @@
+<h2>Lista Dipendenti</h2>
+
+<table border="1" style="width: 100%; border-collapse: collapse;">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>Email</th>
+      <th>Genere</th>
+      <th>Indirizzo</th>
+      <th>Hobby</th>
+      <th>Paese</th>
+      <th>Contratto ID</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let emp of employees">
+      <td>{{ emp.id }}</td>
+      <td>{{ emp.fullname }}</td>
+      <td>{{ emp.email }}</td>
+      <td>{{ emp.gender }}</td>
+      <td>{{ emp.address }}</td>
+      <td>{{ emp.hobby }}</td>
+      <td>{{ emp.country }}</td>
+      <td>{{ emp.contrattoId }}</td>
+    </tr>
+  </tbody>
+</table>
