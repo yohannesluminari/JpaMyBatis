@@ -1,19 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Contratto } from '../interfacce/contratto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContrattoService {
 
-  private apiUrl = ' http://localhost:9090/api/contratti';
+  private apiUrl = 'http://localhost:9090/api/contratti';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  // Metodo per ottenere la lista dei contratti
-  getContratti(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+  getContratti(): Observable<Contratto[]> {
+    return this.http.get<Contratto[]>(this.apiUrl);
   }
-
 }

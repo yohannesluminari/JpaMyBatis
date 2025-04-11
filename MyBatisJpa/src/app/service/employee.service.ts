@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+// src/app/service/employee.service.ts
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable, of, tap } from 'rxjs';
 import { EmployeeResponse } from '../interfacce/response/employee-response';
 
@@ -7,23 +8,21 @@ import { EmployeeResponse } from '../interfacce/response/employee-response';
   providedIn: 'root'
 })
 export class EmployeeService {
-  private employeesCache: EmployeeResponse[] | null = null;
   private employeesUrl = 'http://localhost:9090/api/employees';
+  private cache: EmployeeResponse[] | null = null;
+
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<EmployeeResponse[]> {
-    if (this.employeesCache) {
-      return of(this.employeesCache); // restituisco dati in cache
-    } else {
-      return this.http.get<EmployeeResponse[]>('http://localhost:9090/api/employees').pipe(
-        tap(data => this.employeesCache = data) // salvo in cache
-      );
+    if (this.cache) {
+      return of(this.cache);
     }
+    return this.http.get<EmployeeResponse[]>(this.employeesUrl).pipe(
+      tap(data => this.cache = data)
+    );
   }
 
-  clearCache(): void {
-    this.employeesCache = null;
+  clearCache() {
+    this.cache = null;
   }
 }
-
-

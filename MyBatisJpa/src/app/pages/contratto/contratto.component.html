@@ -1,16 +1,27 @@
-<div>
-  <h1>Contratti</h1>
-  <p>Contratto works!</p>
-
-  <ul *ngIf="contratti.length > 0; else noContratti">
-    <li *ngFor="let contratto of contratti">
-      <p><strong>ID Contratto:</strong> {{ contratto.idContratto }}</p>
-      <p><strong>Descrizione:</strong> {{ contratto.descrizione }}</p>
-    </li>
-  </ul>
-
-
-  <ng-template #noContratti>
-    <p>Nessun contratto disponibile.</p>
-  </ng-template>
+<div class="container mt-4">
+  <h2>Lista Contratti</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Assunzione</th>
+        <th>Dimissione</th>
+        <th>Stipendio</th>
+        <th>Status</th>
+        <th>Ruolo</th>
+        <th>Categoria</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let contratto of contratti">
+        <td>{{ contratto.idContratto }}</td>
+        <td>{{ contratto.dataAssunzione }}</td>
+        <td>{{ contratto.dataDimissione }}</td>
+        <td>{{ contratto.stipendio | currency:'EUR' }}</td>
+        <td>{{ contratto.status ? 'Attivo' : 'Non Attivo' }}</td>
+        <td>{{ contratto.ruoloDescrizione }}</td>
+        <td>{{ contratto.categoriaTipo }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>

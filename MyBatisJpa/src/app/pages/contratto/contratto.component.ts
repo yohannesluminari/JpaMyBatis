@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ContrattoService } from '../../service/contratto.service';
+import { Contratto } from '../../interfacce/contratto';
 
 @Component({
   selector: 'app-contratto',
@@ -7,20 +8,14 @@ import { ContrattoService } from '../../service/contratto.service';
   styleUrl: './contratto.component.css'
 })
 export class ContrattoComponent implements OnInit {
+  contratti: Contratto[] = [];
 
-  contratti: any[] = [];
-
-  constructor(private contrattoService: ContrattoService) { }
+  constructor(private contrattoService: ContrattoService) {}
 
   ngOnInit(): void {
-
-    this.contrattoService.getContratti().subscribe(
-      (data) => {
-        this.contratti = data;
-      },
-      (error) => {
-        console.error('Errore nel recupero dei contratti', error);
-      }
-    );
+    this.contrattoService.getContratti().subscribe({
+      next: (data) => this.contratti = data,
+      error: (err) => console.error('Errore nel recupero dei contratti:', err)
+    });
   }
 }

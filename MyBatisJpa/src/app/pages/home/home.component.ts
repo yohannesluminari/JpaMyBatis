@@ -13,14 +13,9 @@ export class HomeComponent implements OnInit {
   constructor(private employeeService: EmployeeService) {}
 
   ngOnInit(): void {
-    this.getEmployees();
-  }
-
-
-  getEmployees(): void {
     this.employeeService.getAll().subscribe({
       next: (data) => this.employees = data,
-      error: (err) => console.error('Errore nel recupero degli employee:', err)
+      error: (err) => console.error('Errore caricamento dati', err)
     });
   }
 }
