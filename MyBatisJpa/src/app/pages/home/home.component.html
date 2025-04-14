@@ -1,13 +1,11 @@
 <div class="container mt-4">
-  <h2>Lista Dipendenti</h2>
+  <div class="d-flex justify-content-between align-items-center">
+    <h2>Lista Dipendenti</h2>
+    <button class="btn btn-primary" (click)="toggleForm()">➕ Aggiungi Dipendente</button>
+  </div>
 
-  <!-- Bottone per mostrare o nascondere il form -->
-  <button class="btn btn-primary mb-3" (click)="toggleForm()">➕ Aggiungi Dipendente</button>
-
-  <!-- Form di creazione dipendente che appare solo quando isFormVisible è true -->
   <app-create-employee *ngIf="isFormVisible" (employeeSaved)="onEmployeeSaved()"></app-create-employee>
 
-  <!-- Tabella per visualizzare i dipendenti -->
   <table class="table table-bordered table-striped mt-3">
     <thead class="table-dark">
       <tr>
