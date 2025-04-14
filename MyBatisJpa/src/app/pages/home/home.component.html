@@ -30,19 +30,25 @@
         <td>{{ emp.hobby }}</td>
         <td>{{ emp.country }}</td>
         <td>
-          <button *ngIf="emp.contrattoId" class="btn btn-info">
-            Contratto Info
-          </button>
-          <button *ngIf="!emp.contrattoId" class="btn btn-success">
-            Add Contratto
-          </button>
+          <button *ngIf="emp.contrattoId" class="btn btn-info">Contratto Info</button>
+          <button *ngIf="!emp.contrattoId" class="btn btn-success">Add Contratto</button>
         </td>
         <td>
-          <button class="btn btn-danger btn-sm" (click)="deleteEmployee(emp.id)">
-            🗑 Elimina
-          </button>
+          <button class="btn btn-danger btn-sm" (click)="showDeleteModal(emp.id)">🗑 Elimina</button>
         </td>
       </tr>
     </tbody>
   </table>
+
+  <!-- MODALE CENTRATA -->
+  <div *ngIf="confirmModalVisible" class="custom-modal-backdrop">
+    <div class="custom-modal">
+      <h5>Conferma Eliminazione</h5>
+      <p>Sei sicuro di voler eliminare questo dipendente?</p>
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-secondary me-2" (click)="cancelDelete()">Annulla</button>
+        <button class="btn btn-danger" (click)="confirmDelete()">Elimina</button>
+      </div>
+    </div>
+  </div>
 </div>
