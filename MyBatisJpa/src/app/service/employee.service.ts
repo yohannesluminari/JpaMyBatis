@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, tap } from 'rxjs';
 import { EmployeeResponse } from '../interfacce/response/employee-response';
+import { Employee } from '../interfacce/employee';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,10 @@ export class EmployeeService {
     return this.http.get<EmployeeResponse[]>(this.employeesUrl).pipe(
       tap(data => this.cache = data)
     );
+  }
+
+  create(employee: Employee): Observable<Employee> {
+    return this.http.post<Employee>(`${this.employeesUrl}/create`, employee);
   }
 
   clearCache() {
