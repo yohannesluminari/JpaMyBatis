@@ -1,4 +1,3 @@
-// src/app/service/employee.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, tap } from 'rxjs';
@@ -24,13 +23,16 @@ export class EmployeeService {
   }
 
   create(employee: Employee): Observable<Employee> {
-    return this.http.post<Employee>(`${this.employeesUrl}/create`, employee);
+    return this.http.post<Employee>(`${this.employeesUrl}/create`, employee).pipe(
+      tap(() => this.clearCache()) // Dopo il create svuota la cache per forzare il ricaricamento
+    );
   }
 
   delete(id: number): Observable<string> {
-    return this.http.post(`${this.employeesUrl}/delete`, { id }, { responseType: 'text' });
+    return this.http.post(`${this.employeesUrl}/delete`, { id }, { responseType: 'text' }).pipe(
+      tap(() => this.clearCache()) // Dopo il delete svuota la cache per forzare il ricaricamento
+    );
   }
-
 
   clearCache() {
     this.cache = null;

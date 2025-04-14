@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Employee } from '../../interfacce/employee';
 import { EmployeeService } from '../../service/employee.service';
 import { NgForm } from '@angular/forms';
+import { EmployeeResponse } from '../../interfacce/response/employee-response';
 
 @Component({
   selector: 'app-create-employee',
@@ -10,7 +11,7 @@ import { NgForm } from '@angular/forms';
   styleUrl: './create-employee.component.css'
 })
 export class CreateEmployeeComponent {
-  @Output() employeeSaved = new EventEmitter<void>();  // Evento per notificare il salvataggio
+  @Output() employeeSaved = new EventEmitter<EmployeeResponse | undefined>();
 
   employee: Employee = {
     fullname: '',

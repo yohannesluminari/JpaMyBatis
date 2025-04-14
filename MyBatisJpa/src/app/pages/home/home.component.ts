@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
     this.loadEmployees();
   }
 
+  // Carica i dipendenti
   loadEmployees(): void {
     this.employeeService.getAll().subscribe({
       next: (data) => {
@@ -32,16 +33,24 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  // Funzione per aggiungere un nuovo dipendente
+  addEmployee(employee: EmployeeResponse): void {
+    this.employees.push(employee); // Aggiungi il nuovo dipendente nell'array
+  }
+
+  // Mostra la finestra di conferma per eliminare un dipendente
   showDeleteModal(id: number): void {
     this.deleteCandidateId = id;
     this.confirmModalVisible = true;
   }
 
+  // Annulla l'eliminazione
   cancelDelete(): void {
     this.confirmModalVisible = false;
     this.deleteCandidateId = null;
   }
 
+  // Conferma l'eliminazione di un dipendente
   confirmDelete(): void {
     if (this.deleteCandidateId !== null) {
       this.employeeService.delete(this.deleteCandidateId).subscribe({
@@ -58,12 +67,18 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  // Mostra o nasconde il form per aggiungere un dipendente
   toggleForm(): void {
     this.isFormVisible = !this.isFormVisible;
   }
 
-  onEmployeeSaved(): void {
+  // Gestisce l'evento quando un dipendente è stato salvato (add o update)
+  onEmployeeSaved(employee?: EmployeeResponse): void {
+    if (employee) {
+      // Se il dipendente è stato salvato, aggiungilo nella lista
+      this.addEmployee(employee);
+    }
     this.isFormVisible = false;
-    this.loadEmployees();
+    this.loadEmployees();  // Ricarica i dipendenti dopo ogni operazione di CRUD
   }
 }

@@ -4,7 +4,7 @@
     <button class="btn btn-primary" (click)="toggleForm()">➕ Aggiungi Dipendente</button>
   </div>
 
-  <app-create-employee *ngIf="isFormVisible" (employeeSaved)="onEmployeeSaved()"></app-create-employee>
+  <app-create-employee *ngIf="isFormVisible" (employeeSaved)="onEmployeeSaved($event)"></app-create-employee>
 
   <table class="table table-bordered table-striped mt-3">
     <thead class="table-dark">
@@ -40,7 +40,7 @@
     </tbody>
   </table>
 
-  <!-- MODALE CENTRATA -->
+  <!-- Modal di conferma -->
   <div *ngIf="confirmModalVisible" class="custom-modal-backdrop">
     <div class="custom-modal">
       <h5>Conferma Eliminazione</h5>
