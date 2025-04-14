@@ -16,7 +16,7 @@
         <th>Indirizzo</th>
         <th>Hobby</th>
         <th>Paese</th>
-        <th>Contratto ID</th>
+        <th>Contratto</th>
       </tr>
     </thead>
     <tbody>
@@ -28,7 +28,14 @@
         <td>{{ emp.address }}</td>
         <td>{{ emp.hobby }}</td>
         <td>{{ emp.country }}</td>
-        <td>{{ emp.contrattoId }}</td>
+        <td>
+          <button *ngIf="emp.contrattoId" class="btn btn-info">
+            Contratto Info
+          </button>
+          <button *ngIf="!emp.contrattoId" class="btn btn-success">
+            Add Contratto
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>
