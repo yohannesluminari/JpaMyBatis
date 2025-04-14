@@ -1,8 +1,13 @@
-<!-- src/app/pages/home/home.component.html -->
 <div class="container mt-4">
   <h2>Lista Dipendenti</h2>
-  <!-- <a class="btn btn-primary mb-3" [routerLink]="['/create']">➕ Aggiungi Dipendente</a> -->
-  <app-create-employee></app-create-employee>
+
+  <!-- Bottone per mostrare o nascondere il form -->
+  <button class="btn btn-primary mb-3" (click)="toggleForm()">➕ Aggiungi Dipendente</button>
+
+  <!-- Form di creazione dipendente che appare solo quando isFormVisible è true -->
+  <app-create-employee *ngIf="isFormVisible" (employeeSaved)="onEmployeeSaved()"></app-create-employee>
+
+  <!-- Tabella per visualizzare i dipendenti -->
   <table class="table table-bordered table-striped mt-3">
     <thead class="table-dark">
       <tr>
