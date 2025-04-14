@@ -27,6 +27,11 @@ export class EmployeeService {
     return this.http.post<Employee>(`${this.employeesUrl}/create`, employee);
   }
 
+  delete(id: number): Observable<string> {
+    return this.http.post(`${this.employeesUrl}/delete`, { id }, { responseType: 'text' });
+  }
+
+
   clearCache() {
     this.cache = null;
   }

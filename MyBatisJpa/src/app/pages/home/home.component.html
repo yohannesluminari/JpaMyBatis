@@ -17,6 +17,7 @@
         <th>Hobby</th>
         <th>Paese</th>
         <th>Contratto</th>
+        <th>Azioni</th>
       </tr>
     </thead>
     <tbody>
@@ -34,6 +35,11 @@
           </button>
           <button *ngIf="!emp.contrattoId" class="btn btn-success">
             Add Contratto
+          </button>
+        </td>
+        <td>
+          <button class="btn btn-danger btn-sm" (click)="deleteEmployee(emp.id)">
+            🗑 Elimina
           </button>
         </td>
       </tr>

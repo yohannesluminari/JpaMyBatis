@@ -30,6 +30,21 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  deleteEmployee(id: number): void {
+    if (confirm('Sei sicuro di voler eliminare questo dipendente?')) {
+      this.employeeService.delete(id).subscribe({
+        next: (msg) => {
+          console.log(msg);
+          this.loadEmployees(); // Ricarica la lista dopo l'eliminazione
+        },
+        error: (err) => {
+          console.error('Errore durante l\'eliminazione', err);
+        }
+      });
+    }
+  }
+
+
   // Mostra o nasconde il form
   toggleForm(): void {
     this.isFormVisible = !this.isFormVisible;
