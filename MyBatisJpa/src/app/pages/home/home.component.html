@@ -31,7 +31,10 @@
         <td>{{ emp.country }}</td>
         <td>
           <button *ngIf="emp.contrattoId" class="btn btn-info">Contratto Info</button>
-          <button *ngIf="!emp.contrattoId" class="btn btn-success">Add Contratto</button>
+          <button *ngIf="!emp.contrattoId" class="btn btn-success" (click)="showContrattoForm(emp.id)">
+            Add Contratto
+          </button>
+
         </td>
         <td>
           <button class="btn btn-danger btn-sm" (click)="showDeleteModal(emp.id)">🗑 Elimina</button>
@@ -50,5 +53,53 @@
         <button class="btn btn-danger" (click)="confirmDelete()">Elimina</button>
       </div>
     </div>
+  </div>
+</div>
+<!-- Form per Aggiunta Contratto -->
+<div *ngIf="contrattoFormVisible" class="card mt-4 p-3">
+  <h5>Nuovo Contratto per Dipendente #{{ selectedEmployeeId }}</h5>
+
+  <div class="row mb-2">
+    <div class="col">
+      <label>Data Assunzione:</label>
+      <input type="date" class="form-control" [(ngModel)]="nuovoContratto.dataAssunzione">
+    </div>
+    <div class="col">
+      <label>Data Dimissione:</label>
+      <input type="date" class="form-control" [(ngModel)]="nuovoContratto.dataDimissione">
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col">
+      <label>Stipendio:</label>
+      <input type="number" class="form-control" [(ngModel)]="nuovoContratto.stipendio">
+    </div>
+    <div class="col">
+      <label>Stato:</label>
+      <select class="form-control" [(ngModel)]="nuovoContratto.status">
+        <option [value]="true">Attivo</option>
+        <option [value]="false">Inattivo</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col">
+      <label>Ruolo:</label>
+      <select class="form-control" [(ngModel)]="nuovoContratto.idRuolo" name="ruolo">
+        <option *ngFor="let ruolo of ruoli" [value]="ruolo.id">{{ ruolo.descrizione }}</option>
+      </select>
+
+      <select class="form-control" [(ngModel)]="nuovoContratto.idCategoria" name="categoria">
+        <option *ngFor="let cat of categorie" [value]="cat.id">{{ cat.tipo }}</option>
+      </select>
+
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end">
+    <button class="btn btn-secondary me-2" (click)="contrattoFormVisible = false">Annulla</button>
+    <button class="btn btn-success" (click)="submitContratto()">Salva Contratto</button>
   </div>
 </div>

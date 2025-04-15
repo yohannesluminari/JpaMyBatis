@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeResponse } from '../../interfacce/response/employee-response';
 import { EmployeeService } from '../../service/employee.service';
+import { Categoria } from '../../interfacce/categoria';
+import { Ruolo } from '../../interfacce/ruolo';
+import { CategoriaService } from '../../service/categoria.service';
+import { ContrattoService } from '../../service/contratto.service';
+import { RuoloService } from '../../service/ruolo.service';
 
 
 @Component({
@@ -15,10 +20,28 @@ export class HomeComponent implements OnInit {
   confirmModalVisible: boolean = false;
   deleteCandidateId: number | null = null;
 
-  constructor(private employeeService: EmployeeService) {}
+  contrattoFormVisible: boolean = false;
+selectedEmployeeId: number | null = null;
+
+// Oggetti per form
+ruoli: Ruolo[] = [];
+categorie: Categoria[] = [];
+nuovoContratto: any = {
+  dataAssunzione: '',
+  dataDimissione: '',
+  stipendio: 0,
+  status: true,
+  idRuolo: null,
+  idCategoria: null
+};
+  constructor(  private employeeService: EmployeeService,
+    private contrattoService: ContrattoService,
+    private ruoloService: RuoloService,
+    private categoriaService: CategoriaService) {}
 
   ngOnInit(): void {
     this.loadEmployees();
+    this.loadDropdowns();
   }
 
   // Carica i dipendenti
@@ -81,4 +104,36 @@ export class HomeComponent implements OnInit {
     this.isFormVisible = false;
     this.loadEmployees();  // Ricarica i dipendenti dopo ogni operazione di CRUD
   }
+
+  loadDropdowns(): void {
+    this.ruoloService.getAll().subscribe(res => this.ruoli = res);
+    this.categoriaService.getAll().subscribe(res => this.categorie = res);
+  }
+
+  showContrattoForm(empId: number): void {
+    this.selectedEmployeeId = empId;
+    this.contrattoFormVisible = true;
+    this.nuovoContratto = {
+      dataAssunzione: '',
+      dataDimissione: '',
+      stipendio: 0,
+      status: true,
+      idRuolo: null,
+      idCategoria: null
+    };
+  }
+
+  submitContratto(): void {
+    if (this.selectedEmployeeId !== null) {
+      this.contrattoService.addContrattoToEmployee(this.selectedEmployeeId, this.nuovoContratto).subscribe({
+        next: () => {
+          this.contrattoFormVisible = false;
+          this.selectedEmployeeId = null;
+          this.loadEmployees(); // aggiorna la tabella
+        },
+        error: err => console.error('Errore aggiunta contratto', err)
+      });
+    }
+  }
 }
+
