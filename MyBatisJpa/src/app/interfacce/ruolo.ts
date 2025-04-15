@@ -1,4 +1,4 @@
 export interface Ruolo {
-  id: number;
+  idRuolo: number;
   descrizione: string;
 }

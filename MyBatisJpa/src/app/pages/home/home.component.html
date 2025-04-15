@@ -86,14 +86,23 @@
 
   <div class="row mb-2">
     <div class="col">
-      <label>Ruolo:</label>
-      <select class="form-control" [(ngModel)]="nuovoContratto.idRuolo" name="ruolo">
-        <option *ngFor="let ruolo of ruoli" [value]="ruolo.id">{{ ruolo.descrizione }}</option>
-      </select>
+      <div class="row mb-2">
+        <div class="col">
+          <label>Ruolo:</label>
+          <select class="form-control" [(ngModel)]="nuovoContratto.idRuolo">
+            <option *ngFor="let ruolo of ruoli" [value]="ruolo.idRuolo">{{ ruolo.descrizione }}</option>
+          </select>
+        </div>
 
-      <select class="form-control" [(ngModel)]="nuovoContratto.idCategoria" name="categoria">
-        <option *ngFor="let cat of categorie" [value]="cat.id">{{ cat.tipo }}</option>
-      </select>
+        <div class="col">
+          <label>Categoria:</label>
+          <select class="form-control" [(ngModel)]="nuovoContratto.idCategoria">
+            <option *ngFor="let cat of categorie" [value]="cat.idCategoria">{{ cat.tipo }}</option>
+          </select>
+        </div>
+      </div>
+
+
 
     </div>
   </div>

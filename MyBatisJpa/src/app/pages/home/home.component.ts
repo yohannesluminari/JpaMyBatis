@@ -106,8 +106,19 @@ nuovoContratto: any = {
   }
 
   loadDropdowns(): void {
-    this.ruoloService.getAll().subscribe(res => this.ruoli = res);
-    this.categoriaService.getAll().subscribe(res => this.categorie = res);
+    this.ruoloService.getAll().subscribe(res => {
+      this.ruoli = res.map(r => ({
+        idRuolo: r.idRuolo,    // Usa idRuolo
+        descrizione: r.descrizione
+      }));
+    });
+
+    this.categoriaService.getAll().subscribe(res => {
+      this.categorie = res.map(c => ({
+        idCategoria: c.idCategoria,    // Usa idCategoria
+        tipo: c.tipo
+      }));
+    });
   }
 
   showContrattoForm(empId: number): void {
