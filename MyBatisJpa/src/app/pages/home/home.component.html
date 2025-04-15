@@ -30,7 +30,10 @@
         <td>{{ emp.hobby }}</td>
         <td>{{ emp.country }}</td>
         <td>
-          <button *ngIf="emp.contrattoId" class="btn btn-info">Contratto Info</button>
+          <button *ngIf="emp.contrattoId" class="btn btn-info" (click)="showContractDetails(emp.id)">
+            Contratto Info
+          </button>
+
           <button *ngIf="!emp.contrattoId" class="btn btn-success" (click)="showContrattoForm(emp.id)">
             Add Contratto
           </button>
@@ -110,5 +113,24 @@
   <div class="d-flex justify-content-end">
     <button class="btn btn-secondary me-2" (click)="contrattoFormVisible = false">Annulla</button>
     <button class="btn btn-success" (click)="submitContratto()">Salva Contratto</button>
+  </div>
+</div>
+
+
+<!-- Modal per i dettagli del contratto -->
+<div *ngIf="contractDetailsModalVisible" class="custom-modal-backdrop">
+  <div class="custom-modal">
+    <h5>Dettagli Contratto Dipendente #{{ selectedEmployeeId }}</h5>
+    <div *ngIf="selectedContratto">
+      <p><strong>Data Assunzione:</strong> {{ selectedContratto.dataAssunzione | date }}</p>
+      <p><strong>Data Dimissione:</strong> {{ selectedContratto.dataDimissione | date }}</p>
+      <p><strong>Stipendio:</strong> € {{ selectedContratto.stipendio | number: '1.2-2' }}</p>
+      <p><strong>Stato:</strong> {{ selectedContratto.status ? 'Attivo' : 'Inattivo' }}</p>
+      <p><strong>Ruolo:</strong> {{ selectedContratto.ruoloDescrizione }}</p>
+      <p><strong>Categoria:</strong> {{ selectedContratto.categoriaTipo }}</p>
+    </div>
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-secondary" (click)="closeContractDetailsModal()">Chiudi</button>
+    </div>
   </div>
 </div>

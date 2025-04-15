@@ -20,5 +20,10 @@ export class ContrattoService {
     return this.http.post(`${this.apiUrl}/addContract/${employeeId}`, contratto);
   }
 
+  getContrattoByEmployeeId(employeeId: number): Observable<Contratto> {
+    return this.http.get<Contratto>(`${this.apiUrl}/employee/${employeeId}`);
+  }
+
+
 
 }

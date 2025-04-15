@@ -6,6 +6,7 @@ import { Ruolo } from '../../interfacce/ruolo';
 import { CategoriaService } from '../../service/categoria.service';
 import { ContrattoService } from '../../service/contratto.service';
 import { RuoloService } from '../../service/ruolo.service';
+import { Contratto } from '../../interfacce/contratto';
 
 
 @Component({
@@ -21,7 +22,10 @@ export class HomeComponent implements OnInit {
   deleteCandidateId: number | null = null;
 
   contrattoFormVisible: boolean = false;
-selectedEmployeeId: number | null = null;
+  selectedEmployeeId: number | null = null;
+
+  contractDetailsModalVisible: boolean = false;
+  selectedContratto: Contratto | null = null;
 
 // Oggetti per form
 ruoli: Ruolo[] = [];
@@ -145,6 +149,24 @@ nuovoContratto: any = {
         error: err => console.error('Errore aggiunta contratto', err)
       });
     }
+  }
+
+  showContractDetails(empId: number): void {
+    this.selectedEmployeeId = empId;
+    this.contrattoService.getContrattoByEmployeeId(empId).subscribe({
+      next: (data) => {
+        this.selectedContratto = data;
+        this.contractDetailsModalVisible = true; // Mostra la modale
+      },
+      error: (err) => {
+        console.error('Errore nel caricamento del contratto', err);
+      }
+    });
+  }
+
+  closeContractDetailsModal(): void {
+    this.contractDetailsModalVisible = false;
+    this.selectedContratto = null; // Reset dei dettagli
   }
 }
 
