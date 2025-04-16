@@ -26,13 +26,19 @@
     </div>
 
     <div class="input-container mb-3">
-      <label>Hobby ID</label>
-      <input type="number" class="form-control" required [(ngModel)]="employee.hobbyId" name="hobbyId">
+      <label>Hobby</label>
+      <select class="form-select" required [(ngModel)]="employee.hobbyId" name="hobbyId">
+        <option value="">-- Seleziona Hobby --</option>
+        <option *ngFor="let hobby of hobbies" [value]="hobby.valore">{{ hobby.valore }}</option>
+      </select>
     </div>
 
     <div class="input-container mb-3">
-      <label>Paese ID</label>
-      <input type="number" class="form-control" required [(ngModel)]="employee.countryId" name="countryId">
+      <label>Paese</label>
+      <select class="form-select" required [(ngModel)]="employee.countryId" name="countryId">
+        <option value="">-- Seleziona Paese --</option>
+        <option *ngFor="let country of countries" [value]="country.valore">{{ country.valore }}</option>
+      </select>
     </div>
 
     <div class="input-container mb-3">
